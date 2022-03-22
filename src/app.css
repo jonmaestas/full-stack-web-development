@@ -1,0 +1,24 @@
+:root {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    --primary-color: #f0f0f3;
+    --secondary-color: #a2a2ad;
+    --tertiary-color: #7d7d83;
+}
+
+body {
+    background-color: var(--primary-color);
+    background: linear-gradient(180deg, var(--primary-color), var(--secondary-color), var(--tertiary-color));
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+@media (min-width: 720px) {
+    h1 {
+        font-size: 2.4rem;
+    }
+}
