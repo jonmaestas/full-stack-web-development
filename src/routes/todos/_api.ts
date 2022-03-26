@@ -22,7 +22,8 @@ export const api = (request, data?: Record<string, unknown>) => {
             status = 200;
             todos = todos.map(todo => {
                 if (todo.uid === request.params.uid) {
-                    todo.text = data.text as string;
+                    if (data.text) todo.text = data.text as string;
+                    else todo.done = data.done as boolean;
                 };
                 return todo;
             });
