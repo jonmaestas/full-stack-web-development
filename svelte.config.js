@@ -8,6 +8,9 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
+		methodOverride: {
+			allowed: ['PUT', 'PATCH', 'DELETE']
+		},
 		adapter: adapter(),
 		vite: {
 			server: {
