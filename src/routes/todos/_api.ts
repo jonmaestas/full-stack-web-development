@@ -1,7 +1,9 @@
+import type { RequestEvent } from "@sveltejs/kit/types/internal";
+
 // todo add values to db
 let todos: Todo[] = [];
 
-export const api = (request, data?: Record<string, unknown>) => {
+export const api = (request: RequestEvent, data?: Record<string, unknown>) => {
     let body = {};
     let status = 500;
     switch (request.request.method.toUpperCase()) {
@@ -19,7 +21,6 @@ export const api = (request, data?: Record<string, unknown>) => {
             todos = todos.filter(todo => todo.uid !== request.params.uid)
             break;
         case "PATCH":
-            status = 200;
             todos = todos.map(todo => {
                 if (todo.uid === request.params.uid) {
                     if (data.text) todo.text = data.text as string;
@@ -27,12 +28,15 @@ export const api = (request, data?: Record<string, unknown>) => {
                 };
                 return todo;
             });
+            status = 200;
+            body = todos.find(todo => todo.uid === request.params.uid);
             break;
         default:
             break;
     }
 
-    if (request.request.method.toUpperCase() !== "GET") {
+    if (request.request.method.toUpperCase() !== "GET" &&
+        request.request.headers.get("accept") !== "application/json") {
         return {
             status: 303,
             headers: {
